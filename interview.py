@@ -36,8 +36,8 @@ def IsOneEdit(str1, str2):
                     return False
         return True
 
-    # For length difference of 1: check insertion/deletion
-    # Ensure list1 is the shorter to start. Swap if needed
+    # For length difference of 1: check for one insertion/deletion
+    # Ensure list1 is the shorter
     if len(list1) > len(list2):
         list1, list2 = list2, list1
 
@@ -59,13 +59,28 @@ def IsOneEdit(str1, str2):
 
 
 if __name__ == '__main__':
-    # These were the tests that I remember, but I know there were some 9 or 10 more. 
-    # Wouldn't mind having more tests to playu with and make sure this thing runs properly...
-    tests = [('Cute','Cut'),('Cat','Cut'),('Cat','At'),('Cat','Cute'),('Cut','Tuck')]
+# I wrote out some extra test cases, as well as the ones provided during the test. 
+# I'm embarrassed to say I forgot they don't have to be actual words for a minute there...
+    tests = [
+        ('Cute','Cut'),      # True
+        ('Cat','Cut'),       # True
+        ('Cat','At'),        # True
+        ('Cat','Cute'),      # False
+        ('Cut','Tuck'),      # False
+        ('a',''),            # True
+        ('','a'),            # True
+        ('',''),             # True
+        ('abc','ab'),        # True
+        ('abc','a'),         # False
+        ('abc','abcd'),      # True
+        ('abc','abxcd'),     # False
+        ('pale','ple'),      # True
+        ('pales','pale'),    # True
+        ('pale','bale'),     # True
+        ('pale','bake'),     # False
+    ]
     for a, b in tests:
-        str1 = a
-        str2 = b
-        result = IsOneEdit(str1, str2)
-        print(f"Testing '{str1}' and '{str2}': {result}")
+        result = IsOneEdit(a.lower(), b.lower())
+        print(f"Testing '{a}' and '{b}': {result}")
 
 
